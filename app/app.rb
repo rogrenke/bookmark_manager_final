@@ -29,11 +29,11 @@ class BookmarkManager < Sinatra::Base
   end
 
   get '/tags/:tag_name' do
-    @filtered_links = Link.all.select do |link|
+    @links = Link.all.select do |link|
       link.tags.first.tag_name == params[:tag_name]
     end
-    p @filtered_links
-    erb :tags
+    p @links
+    erb :links
   end
 
 
