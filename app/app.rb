@@ -5,6 +5,8 @@ require_relative 'data_mapper_setup.rb'
 
 class BookmarkManager < Sinatra::Base
 
+  enable :sessions
+
   get '/' do
    "YO"
   end
@@ -21,7 +23,7 @@ class BookmarkManager < Sinatra::Base
 
   post '/links' do
     tag_name_array = params[:tag_name].split(";")
-    link = Link.new(url: params[:url], title: params[:title])
+    link = Link.create(url: params[:url], title: params[:title])
     tag_name_array.each do |tag_name|
       tag = Tag.first_or_create(tag_name: tag_name)
       link.tags << tag
@@ -37,6 +39,19 @@ class BookmarkManager < Sinatra::Base
     erb :links
   end
 
+  get '/sign_up' do
+    erb :sign_up
+  end
+
+  post '/sign_up' do
+    p params
+    session[:email] = params[:email]
+    p session
+    user = User.create(email: params[:email], password: params[:password])
+    session[:current_user] = user
+    p user
+    redirect '/links'
+  end
 
   run! if app_file == $0
 end
