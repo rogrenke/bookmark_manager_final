@@ -3,6 +3,7 @@ feature 'sign up' do
     visit('/sign_up')
     fill_in 'email', with: 'sam@makers.com'
     fill_in 'password', with: '1234'
+    fill_in 'password_confirmation', with: '1234'
     click_button('submit')
     expect(page).to have_content "Links"
     expect(page).to have_content "Welcome sam@makers.com, we are happy to see you!"
