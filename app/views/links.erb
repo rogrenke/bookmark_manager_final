@@ -1,5 +1,13 @@
 <h1>Links</h1>
 
+<% if session[:first_session] %>
+
+  <h2><%= "Welcome #{User.current_user(session[:current_user_id]).email}, we are happy to see you!" %></h2>
+
+  <% session[:first_session] = false %>
+  
+<% end %>
+
 <ul>
   <% @links.each do |link| %>
     <li>Title: <%= link.title %> URL: <%= link.url %> Tags: <%= link.tags.map(&:tag_name)%>  </li>

@@ -13,7 +13,6 @@ class BookmarkManager < Sinatra::Base
 
   get '/links' do
     @links = Link.all
-    # p @links
     erb :links
   end
 
@@ -44,12 +43,9 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/sign_up' do
-    p params
-    session[:email] = params[:email]
-    p session
     user = User.create(email: params[:email], password: params[:password])
-    session[:current_user] = user
-    p user
+    session[:current_user_id] = user.id
+    session[:first_session] = true
     redirect '/links'
   end
 
