@@ -1,6 +1,9 @@
+<% if flash[:notice] %>
+  <div id='notice'><%= flash[:notice] %></div>
+<% end %>
 <h1>Please sign up for ENDLESS BOOKMARK FUN<h1>
 <form action="/sign_up" method="post">
-<input type="text" name="email">
+<input type="text" name="email" value"<% @user.email %>">
 <input type="text" name="password">
 <input type="text" name="password_confirmation">
 <input type="submit" name="submit" value="submit">
