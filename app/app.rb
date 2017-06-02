@@ -6,6 +6,7 @@ require_relative 'data_mapper_setup.rb'
 class BookmarkManager < Sinatra::Base
 
   enable :sessions
+  set :sessions_secret, 'super secret'
 
   get '/' do
    "YO"
